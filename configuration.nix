@@ -147,9 +147,12 @@ fonts.packages = with pkgs; [
 	go
 	gcc
 	direnv
+	devenv
 	nix-direnv
 	wgnord
 	code-cursor
+	kdePackages.kcalc
+	obs-studio
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
