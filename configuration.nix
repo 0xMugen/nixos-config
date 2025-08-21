@@ -123,6 +123,7 @@ fonts.packages = with pkgs; [
 	brave
 	nss
 	cacert
+	unrar
 	nspr
 	at-spi2-core
 	cups
@@ -153,7 +154,14 @@ fonts.packages = with pkgs; [
 	code-cursor
 	kdePackages.kcalc
 	obs-studio
+	nodejs_24
+	blender
+	slack
   ];
+
+  nix.settings.trusted-users = [ "root" "mugen" ];
+  hardware.ledger.enable = true;
+  services.udev.packages = [ pkgs.ledger-udev-rules ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
