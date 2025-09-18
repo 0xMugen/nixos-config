@@ -157,6 +157,10 @@ fonts.packages = with pkgs; [
 	nodejs_24
 	blender
 	slack
+	gh
+	spotify
+    	stdenv.cc.cc.lib
+    	zlib
   ];
 
   nix.settings.trusted-users = [ "root" "mugen" ];
