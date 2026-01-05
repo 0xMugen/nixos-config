@@ -4,6 +4,9 @@
 
 { config, pkgs, ... }:
 
+let
+  antigravity-flake = builtins.getFlake "github:jacopone/antigravity-nix";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -13,6 +16,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  programs.nix-ld.enable = true;
+
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -107,6 +112,13 @@ fonts.packages = with pkgs; [
   programs.direnv.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+    programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+  nixpkgs.overlays = [
+    antigravity-flake.overlays.default
+  ];
   # List packages installed in system profile. To search, run:
 
   # $ nix search wget
@@ -119,7 +131,8 @@ fonts.packages = with pkgs; [
 	wl-clipboard
   	wget
 	git
-	discord
+	discord-ptb
+	(pkgs.callPackage ./cursor.nix {})
 	brave
 	nss
 	cacert
@@ -151,7 +164,6 @@ fonts.packages = with pkgs; [
 	devenv
 	nix-direnv
 	wgnord
-	code-cursor
 	kdePackages.kcalc
 	obs-studio
 	nodejs_24
@@ -161,9 +173,15 @@ fonts.packages = with pkgs; [
 	spotify
     	stdenv.cc.cc.lib
     	zlib
+	firefox
+	tuxpaint
+	google-antigravity
+	sops
+	k9s
   ];
 
   nix.settings.trusted-users = [ "root" "mugen" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   hardware.ledger.enable = true;
   services.udev.packages = [ pkgs.ledger-udev-rules ];
 
