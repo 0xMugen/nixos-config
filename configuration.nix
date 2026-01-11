@@ -178,6 +178,9 @@ fonts.packages = with pkgs; [
 	google-antigravity
 	sops
 	k9s
+	unzip
+	kubectl	
+	kubelogin-oidc
   ];
 
   nix.settings.trusted-users = [ "root" "mugen" ];
