@@ -181,6 +181,7 @@ fonts.packages = with pkgs; [
 	unzip
 	kubectl	
 	kubelogin-oidc
+	steam
   ];
 
   nix.settings.trusted-users = [ "root" "mugen" ];
